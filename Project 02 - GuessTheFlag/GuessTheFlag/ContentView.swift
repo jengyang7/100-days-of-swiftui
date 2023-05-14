@@ -43,9 +43,7 @@ struct ContentView: View {
                             // flag was tapped
                             flagTapped(number)
                         } label: {
-                            Image(countries[number]).renderingMode(.original)
-                                .clipShape(Capsule())
-                                .shadow(radius: 5)
+                            flagImage(country: countries[number])
                         }
                     }
                 }
@@ -59,7 +57,7 @@ struct ContentView: View {
                     .foregroundColor(.white)
                     .font(.title.bold())
                 Spacer()
-                // Challenge 
+                // Challenge
                 Text("Round: \(round)")
                     .foregroundColor(.white)
                     .font(.title.bold())
@@ -108,6 +106,17 @@ struct ContentView: View {
         toReset = false
         round = 1
         userScore = 0
+    }
+
+    struct flagImage: View {
+        var country: String
+
+        var body: some View {
+            Image(country)
+                .renderingMode(.original)
+                .clipShape(Capsule())
+                .shadow(radius: 5)
+        }
     }
 }
 

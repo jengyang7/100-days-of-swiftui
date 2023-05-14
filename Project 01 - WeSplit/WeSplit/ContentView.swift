@@ -42,24 +42,24 @@ struct ContentView: View {
     }
     
     var body: some View {
-        NavigationView{
-            Form{
-                Section{
+        NavigationView {
+            Form {
+                Section {
                     // $ allows two-way binding of the var checkAmount, so that it gets updated with user input
                     TextField("Amount", value: $checkAmount, format: .currency(code: Locale.current.currencyCode ?? "USD"))
                         .keyboardType(.decimalPad)
                         .focused($amountIsFocused)
-                    Picker("Number of people", selection: $numberOfPeople){
-                        ForEach(2..<100){
+                    Picker("Number of people", selection: $numberOfPeople) {
+                        ForEach(2..<100) {
                             Text("\($0) people")
                         }
                     }
                 }
                 
-                Section{
+                Section {
                     // Challenge 3
-                    Picker("Tip percentage", selection: $tipPercentage){
-                        ForEach(0..<101){
+                    Picker("Tip percentage", selection: $tipPercentage) {
+                        ForEach(0..<101) {
                             Text($0, format: .percent)
                         }
                     }
@@ -68,13 +68,15 @@ struct ContentView: View {
                 }
                 
                 // Challenge 2
-                Section{
+                Section {
                     Text(grandTotal, format: .currency(code: Locale.current.currencyCode ?? "USD"))
+                        .foregroundColor(tipPercentage == 0 ? .red : .primary)
+
                 } header: {
                     Text("Total amount for the check")
                 }
                 
-                Section{
+                Section {
                     Text(totalPerPerson, format: .currency(code: Locale.current.currencyCode ?? "USD"))
                 } header: {
                     // Challenge 3
@@ -82,7 +84,7 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("WeSplit")
-            .toolbar{
+            .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
                     Spacer()
                     Button("Done") {
